@@ -24,4 +24,3 @@ class linear_model:
         return prediction.item(0)
 
 linmodel = linear_model(x, y)
-linmodel.train()

@@ -4,7 +4,8 @@ app = Flask(__name__, template_folder='static')
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    msg="test"
+    return render_template('index.html',msg=msg)
 
 @app.route('/linear', methods=['POST'])
 def linear():
@@ -15,6 +16,10 @@ def linear():
 
     return jsonify({'error' : 'Missing input value!'})
 
+@app.route('/linear_init')
+def linear_init():
+    linmodel.train()
+    return render_template('index.html')
 
 if __name__ == "__main__":
-    app.run() #allows for realtime editing
+    app.run(debug=True) #allows for realtime editing
