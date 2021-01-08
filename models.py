@@ -2,13 +2,16 @@ import numpy as np
 import tensorflow.keras as kr
 import pandas as pd
 
+#import and clean the dataset, removing unwanted zero records.
 df = pd.read_csv("powerproduction.csv")
 #Remove the unreasonable power values
 zeroVals = df[(df["speed"] > 10) & (df["power"] == 0)].index
 df.drop(zeroVals, inplace=True)
+#Assinging z & y to speed & power
 x = np.array(df["speed"])
 y = np.array(df["power"])
 
+#Linear regression model class.
 class linear_model:
 
     def __init__(self, speed, power):
@@ -26,6 +29,7 @@ class linear_model:
         prediction = self.model.predict([val])
         return prediction.item(0)
 
+#Polynomial regression model class.
 class polynomial_model:
 
     def __init__(self, speed, power):
@@ -46,6 +50,6 @@ class polynomial_model:
 
 
 
-
+#Create instances of each of the classes, passing them x & y.
 linmodel = linear_model(x, y)
 polymodel = polynomial_model(x, y)
